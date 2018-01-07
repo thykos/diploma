@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107012305) do
+ActiveRecord::Schema.define(version: 20180107102926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.bigint "card_id"
+    t.integer "amount", default: 0
+    t.integer "transaction_ids"
+    t.index ["card_id"], name: "index_accounts_on_card_id"
+  end
+
+  create_table "blacklists", force: :cascade do |t|
+    t.bigint "claims_id"
+    t.bigint "user_id"
+    t.index ["claims_id"], name: "index_blacklists_on_claims_id"
+    t.index ["user_id"], name: "index_blacklists_on_user_id"
+  end
 
   create_table "cards", force: :cascade do |t|
     t.string "number"
@@ -21,6 +35,19 @@ ActiveRecord::Schema.define(version: 20180107012305) do
     t.date "expiry_date"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
+  create_table "claims", force: :cascade do |t|
+    t.bigint "user_id"
+    t.text "description"
+    t.index ["user_id"], name: "index_claims_on_user_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer "account_from_id"
+    t.integer "account_to_id"
+    t.integer "amount", default: 0
+    t.integer "result", default: 0
   end
 
   create_table "users", force: :cascade do |t|
