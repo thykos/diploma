@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
   validates_date :birth_date, on_or_before: lambda { Date.current - 16.years }
   has_many :cards
   has_many :claims
-  has_one :black_list
+  has_one :blacklist
 end

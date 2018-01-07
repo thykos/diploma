@@ -6,7 +6,7 @@ class Claim < ActiveRecord::Base
   def add_user_to_black_list
     claims = Claim.where(user_id: user_id)
     if claims.size > 3
-      BlackList.create(user_id: user_id, claim_ids: claims.grep(:id) )
+      Blacklist.create(user_id: user_id, claim_ids: claims.grep(:id) )
     end
   end
 end

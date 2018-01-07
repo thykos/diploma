@@ -17,3 +17,8 @@
 /yarn-error.log
 .env
 .byebug_history
+
+/frontend/.gitignore
+/frontend/tmp
+/frontend/node_modules
+/frontend/build
