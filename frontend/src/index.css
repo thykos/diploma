@@ -3,3 +3,70 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+
+
+.cardWrapper {
+  width: 300px;
+  height: 180px;
+  border-radius: 8px;
+  border: 2px solid #000;
+  background: #000;
+  position: relative;
+}
+
+.cardWrapper .cardNumber {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  margin-left: 20px;
+  color: #fff;
+  font-size: 22px;
+}
+
+.cardWrapper .removeCard {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  right: 10px;
+  color: #fff;
+  font-size: 22px;
+}
+
+.cardWrapper .cardDate {
+  position: absolute;
+  top: 75%;
+  left: 60%;
+  color: #fff;
+  font-size: 16px;
+}
+.cardAccountInfo {
+  display: flex;
+  margin-bottom: 30px;
+  align-items: flex-start;
+}
+
+.accountInfo {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+
+.accountInfo .accountField {
+  flex: 1 100%;
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.accountInfo .accountField .accountFieldTitle {
+  flex: 1;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.accountInfo .accountField .accountFieldContent {
+  flex: 2;
+  font-size: 18px;
+  margin-left: 10px;
+}

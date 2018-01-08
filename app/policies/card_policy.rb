@@ -7,4 +7,16 @@ class CardPolicy < ApplicationPolicy
     show?
   end
 
+  def create?
+    show?
+  end
+
+  def destroy
+    show?
+  end
+
+  def permitted_attributes
+    [:number, :cvv2, :expiry_date, :id, :user_id]
+  end
+
 end
