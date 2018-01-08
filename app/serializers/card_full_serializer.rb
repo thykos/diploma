@@ -1,5 +1,5 @@
 class CardFullSerializer < ActiveModel::Serializer
   attributes :id, :number, :user_id, :cvv2, :expiry_date
 
-  has_one :account
+  has_one :account, serializer: AccountSerializer
 end

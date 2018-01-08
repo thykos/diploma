@@ -8,7 +8,7 @@ class CardsController < ApplicationController
   def destroy
     current_user.cards.where(id: params[:id]).destroy_all
 
-    response json: {status: 'ok' }
+    render json: {status: 'ok' }
   end
 
   def create
