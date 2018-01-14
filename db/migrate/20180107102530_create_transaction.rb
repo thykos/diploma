@@ -5,6 +5,7 @@ class CreateTransaction < ActiveRecord::Migration[5.1]
       t.integer :account_to_id
       t.integer :amount, default: 0
       t.integer :result, default: 0
+      t.timestamps
     end
     add_column :accounts, :transaction_ids, :integer
   end

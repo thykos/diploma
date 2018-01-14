@@ -21,22 +21,6 @@ class Card extends Component {
       }));
   }
 
-  // account_from_id
-  //   :
-  //   8
-  // account_to_id
-  //   :
-  //   6
-  // amount
-  //   :
-  //   1000
-  // id
-  //   :
-  //   3
-  // result
-  //   :
-  //   "approved"
-
 
   renderTable = (data) => {
     return (

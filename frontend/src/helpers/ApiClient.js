@@ -40,14 +40,13 @@ class ApiClient {
         }
 
         request.end((error, response) => {
-          // this.store.dispatch(hideSpinner());
           if (error) {
             if (error.status === 401) {
               clearAuthData();
             }
             reject(response.body || error);
           } else {
-            if ((/auth|users/).test(path) && response.headers['access-token']) {
+            if ((/auth/).test(path) && response.headers['access-token']) {
               this.store.dispatch(setAuthDataToStore(response.headers));
             }
             return resolve(response.body);

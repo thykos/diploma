@@ -70,3 +70,8 @@ body {
   font-size: 18px;
   margin-left: 10px;
 }
+
+textarea.form-control {
+  height: 200px;
+  resize: none;
+}

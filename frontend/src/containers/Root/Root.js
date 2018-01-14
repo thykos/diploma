@@ -4,6 +4,7 @@ import { get } from 'lodash';
 import App from '../App/App';
 import Auth from '../Auth/Auth';
 import client from '../../helpers/ApiClient';
+import { clearAuthData } from '../../helpers/authData';
 import { setUser } from '../../reducers/auth';
 import { setCards } from '../../reducers/cards';
 import { Route } from 'react-router-dom';
@@ -20,16 +21,18 @@ class Root extends Component {
         if (!history.location.pathname.includes('login', 'signup')) {
           this.props.history.push('/login');
         }
+        clearAuthData();
       });
   }
 
   componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
     const { history } = this.props;
-    if (get(user, 'id') && history.location.pathname.includes('login', 'signup')) {
+    const pathname = history.location.pathname;
+    if (get(user, 'id') && (pathname.includes('login') || pathname.includes('signup'))) {
       this.props.history.push('/');
     }
-    if (!get(user, 'id') && !history.location.pathname.includes('login', 'signup')) {
+    if (!get(user, 'id') && !(pathname.includes('login') || pathname.includes('signup'))) {
       this.props.history.push('/login');
     }
   }

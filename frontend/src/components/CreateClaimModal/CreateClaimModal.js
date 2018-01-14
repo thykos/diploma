@@ -15,61 +15,41 @@ const styles = {
   content : {
     position                   : 'absolute',
     top                        : '40px',
+    width                      : '400px',
     left                       : '50%',
     transform                  : 'translateX(-50%)',
-    width                      : '400px',
     right                      : '40px',
     bottom                     : '40px',
     border                     : '1px solid #ccc',
     background                 : '#fff',
     overflow                   : 'auto',
     WebkitOverflowScrolling    : 'touch',
-    height                     : '400px',
+    height                     : '380px',
     outline                    : 'none',
     padding                    : '20px'
 
   }
 };
 
-class AddCardModal extends Component {
+class CreateClaimModal extends Component {
 
   static Form = reduxForm({
-    form: 'addCardForm',
-    fields: ['number', 'expiry_date', 'cvv2']
+    form: 'addClaimForm',
+    fields: ['description']
   })(({handleSubmit}) => (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label >Номер</label>
+          <label >Описание жалобы</label>
           <Field
-            name="number"
+            name="description"
             className="form-control"
-            component="input"
-            type="text"
-            placeholder="Номер"
-          />
-        </div>
-        <div className="form-group">
-          <label >CVV2</label>
-          <Field
-            name="cvv2"
-            className="form-control"
-            component="input"
-            type="text"
-            placeholder="cvv2"
-          />
-        </div>
-        <div className="form-group">
-          <label >Expiry date</label>
-          <Field
-            name="expiry_date"
-            className="form-control"
-            component="input"
-            type="date"
+            component="textarea"
+            placeholder="Введите текст жалобы"
           />
         </div>
         <div className="text-center">
-          <Button type="submit" bsStyle="primary"> Добавить </Button>
+          <Button type="submit" bsStyle="primary"> Отправить </Button>
         </div>
       </form>
     </div>
@@ -79,11 +59,11 @@ class AddCardModal extends Component {
     const { isOpen, onSubmit, onClose } = this.props;
     return (
       <Modal isOpen={isOpen} style={styles} onRequestClose={onClose}>
-        <h4>Добавить карту</h4>
-        <AddCardModal.Form onSubmit={onSubmit}/>
+        <h4>Создать жалобу</h4>
+        <CreateClaimModal.Form onSubmit={onSubmit}/>
       </Modal>
     )
   }
 }
 
-export default AddCardModal;
+export default CreateClaimModal;

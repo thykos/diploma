@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import { reduxForm, Field } from 'redux-form';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 const styles = {
   overlay : {
@@ -15,9 +16,9 @@ const styles = {
   content : {
     position                   : 'absolute',
     top                        : '40px',
+    width                      : '400px',
     left                       : '50%',
     transform                  : 'translateX(-50%)',
-    width                      : '400px',
     right                      : '40px',
     bottom                     : '40px',
     border                     : '1px solid #ccc',
@@ -31,59 +32,61 @@ const styles = {
   }
 };
 
-class AddCardModal extends Component {
+class CreateTransactionModal extends Component {
 
   static Form = reduxForm({
     form: 'addCardForm',
-    fields: ['number', 'expiry_date', 'cvv2']
-  })(({handleSubmit}) => (
+    fields: ['card_id', 'card_to_number', 'amount']
+  })(({handleSubmit, cards}) => (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label >Номер</label>
+          <label >Выберите карту</label>
           <Field
-            name="number"
+            name="card_id"
             className="form-control"
-            component="input"
+            component="select"
             type="text"
             placeholder="Номер"
-          />
+          >
+            {cards.map((card, idx) => <option key={idx} value={card.id}>{card.number}</option>)}
+          </Field>
         </div>
         <div className="form-group">
-          <label >CVV2</label>
+          <label >Сумма</label>
           <Field
-            name="cvv2"
+            name="amount"
             className="form-control"
             component="input"
             type="text"
-            placeholder="cvv2"
           />
         </div>
         <div className="form-group">
-          <label >Expiry date</label>
+          <label >Номер карты получателя</label>
           <Field
-            name="expiry_date"
+            name="card_to_number"
             className="form-control"
             component="input"
-            type="date"
+            placeholder="4242424242424242"
+            type="text"
           />
         </div>
         <div className="text-center">
-          <Button type="submit" bsStyle="primary"> Добавить </Button>
+          <Button type="submit" bsStyle="primary"> Создать </Button>
         </div>
       </form>
     </div>
   ));
 
   render() {
-    const { isOpen, onSubmit, onClose } = this.props;
+    const { isOpen, onSubmit, onClose, cards } = this.props;
     return (
       <Modal isOpen={isOpen} style={styles} onRequestClose={onClose}>
-        <h4>Добавить карту</h4>
-        <AddCardModal.Form onSubmit={onSubmit}/>
+        <h4>Создать транзакцию</h4>
+        <CreateTransactionModal.Form cards={cards} onSubmit={onSubmit}/>
       </Modal>
     )
   }
 }
 
-export default AddCardModal;
+export default connect(state => ({cards: state.cards}))(CreateTransactionModal);

@@ -7,7 +7,6 @@ class CardsController < ApplicationController
 
   def destroy
     current_user.cards.where(id: params[:id]).destroy_all
-
     render json: {status: 'ok' }
   end
 
@@ -18,8 +17,7 @@ class CardsController < ApplicationController
   end
 
   def index
-    cards = Card.where(user_id: current_user.id).includes(:account)
-    # render_resources cards, each_serializer: CardSerializer
+    cards = current_user.cards.includes(:account)
     render json: { resources: cards }, each_serializer: CardFullSerializer
   end
 end

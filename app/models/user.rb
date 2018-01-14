@@ -7,7 +7,9 @@ class User < ActiveRecord::Base
   has_many :claims
   has_one :blacklist
 
-  # def send_confirmation_notification?
-  #   false
-  # end
+  def all_transactions
+    transactions = []
+    Account.where(card_id: self.cards.pluck(:id)).map do |item| transactions.concat item.transactions end
+    transactions
+  end
 end

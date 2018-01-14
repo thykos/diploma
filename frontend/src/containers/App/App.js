@@ -23,15 +23,15 @@ class App extends Component {
         <Navbar>
           <Navbar.Header>
             <Navbar.Brand>
-              <Link to="/">Diploma</Link>
+              <Link to="/">The payments</Link>
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <NavItem eventKey={1} href="#">
-              Link
+            <NavItem eventKey={1} href="#" onClick={() => push('/transactions')}>
+              Мои транзакции
             </NavItem>
             <NavItem eventKey={2} href="#">
-              Link
+              Мои жалобы
             </NavItem>
           </Nav>
           <Nav pullRight>

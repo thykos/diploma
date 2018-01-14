@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import moment from 'moment';
-import { Link } from 'react-router-dom';
 import './styles.css';
 import client from '../../helpers/ApiClient';
-import { splitNumber } from '../../helpers/card';
-import { get } from 'lodash';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { removeCard, addCard } from '../../reducers/cards';
 import AddCardModal from '../../components/AddCardModal/AddCardModal';
+import Card from '../../components/Card/Card';
 
 class Cards extends Component {
   constructor(props) {
@@ -54,22 +51,7 @@ class Cards extends Component {
           <Button type="submit" bsStyle="primary" onClick={this.onShowModal}> Добавить карту </Button>
         </div>
         {cards.map((card, idx) =>
-          <div className="cardAccountInfo" key={idx}>
-            <div className="cardWrapper">
-              <span className="removeCard" onClick={() => this.onRemove(card)}>&times;</span>
-              <div className="cardNumber">{splitNumber(card.number)}</div>
-              <div className="cardDate">{moment(card.expiry_date).format('MM/YY')}</div>
-            </div>
-            <div className="accountInfo">
-              <div className="accountField">
-                <div className="accountFieldTitle">Баланс:</div>
-                <div className="accountFieldContent">{get(card, 'account.ammount') || 0}</div>
-              </div>
-              <div className="accountField">
-                <Link to={`/cards/${card.id}`}>Транзакции</Link>
-              </div>
-            </div>
-          </div>
+          <Card key={idx} withLink card={card} onRemove={() => this.onRemove(card)}/>
         )}
         <AddCardModal isOpen={showModal} onSubmit={this.onCreateCard} onClose={this.onCloseModal} />
       </div>
