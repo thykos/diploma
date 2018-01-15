@@ -8,8 +8,14 @@ class User < ActiveRecord::Base
   has_one :blacklist
 
   def all_transactions
-    transactions = []
-    Account.where(card_id: self.cards.pluck(:id)).map do |item| transactions.concat item.transactions end
+    transactions = {
+        created: [],
+        received: []
+    }
+    Account.where(card_id: self.cards.pluck(:id)).map do |item|
+      transactions[:created].concat item.transactions_created.to_a
+      transactions[:received].concat item.transactions_received.to_a
+    end
     transactions
   end
 end

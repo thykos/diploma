@@ -20,6 +20,7 @@ class TransactionsController < ApplicationController
   end
 
   def index
-    render json: {resources: current_user.all_transactions, meta: {total: current_user.all_transactions.size}}
+    total = current_user.all_transactions[:created].size + current_user.all_transactions[:received].size
+    render json: {resources: current_user.all_transactions, meta: {total: total}}
   end
 end
