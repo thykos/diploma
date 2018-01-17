@@ -12,7 +12,7 @@ class Profile extends Component {
     form: 'userForm',
     fields: ['first_name', 'last_name', 'birth_date', 'email']
   })(({handleSubmit}) => (
-    <div>
+    <div className="userFormWrapper">
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label >Имя</label>

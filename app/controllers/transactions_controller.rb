@@ -9,7 +9,11 @@ class TransactionsController < ApplicationController
       transaction = Transaction.create({
                                            amount: params[:resource][:amount],
                                            account_from_id: from.id,
-                                           account_to_id: to_id
+                                           account_to_id: to_id,
+                                           loc: params[:resource][:loc],
+                                           city: params[:resource][:city],
+                                           country: params[:resource][:country],
+                                           ip: params[:resource][:ip]
                                        })
       transaction.save
       render_resource_or_errors transaction

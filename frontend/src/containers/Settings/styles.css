@@ -5,3 +5,8 @@
 .addCardBtnWrapper {
     margin: 20px 0;
 }
+
+.userFormWrapper {
+    width: 400px;
+    margin: 0 auto;
+}

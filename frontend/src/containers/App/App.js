@@ -30,7 +30,7 @@ class App extends Component {
             <NavItem eventKey={1} href="#" onClick={() => push('/transactions')}>
               Мои транзакции
             </NavItem>
-            <NavItem eventKey={2} href="#">
+            <NavItem eventKey={2} href="#" onClick={() => push('/claims')}>
               Мои жалобы
             </NavItem>
           </Nav>

@@ -5,4 +5,9 @@ class ClaimsController < ApplicationController
     claim.save
     render_resource_or_errors claim
   end
+
+  def index
+    claims = Claim.where(author: current_user.id)
+    render json: {resources: claims, meta: { total: claims.size }}
+  end
 end

@@ -18,8 +18,20 @@ class Transaction < ActiveRecord::Base
     if Blacklist.where(user_id: user_to).size > 0
       self.result = 1
     else
+      check_locations
+    end
+  end
+
+
+  def check_locations
+    transactions_list = Transaction.where(account_from_id: self.account_from_id)
+    cities = transactions_list.pluck(:city)
+    countries = transactions_list.pluck(:country)
+    if cities.last && (cities.last != self.city) && countries.last && (countries.last != self.country)
+      self.result = 1
+    else
       self.result = 0
     end
-
   end
 end
+

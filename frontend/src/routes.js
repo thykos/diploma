@@ -3,6 +3,7 @@ import Home from './containers/Home/Home';
 import Settings from './containers/Settings/Settings';
 import Card from './containers/Card/Card';
 import Transactions from './containers/Transactions/Transactions';
+import Claims from './containers/Claims/Claims';
 import { Route, Switch } from 'react-router-dom';
 
 export default () => (
@@ -10,6 +11,7 @@ export default () => (
     <Route exact path='/' component={Home}/>
     <Route path='/settings' component={Settings}/>
     <Route path='/transactions' component={Transactions}/>
+    <Route path='/claims' component={Claims}/>
     <Route path='/cards/:id' component={Card}/>
   </Switch>
 );

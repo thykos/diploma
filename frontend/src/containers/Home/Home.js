@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { removeCard, addCard } from '../../reducers/cards';
 import AddCardModal from '../../components/AddCardModal/AddCardModal';
 import Card from '../../components/Card/Card';
+import { get } from 'lodash';
 import CreateTransactionModal from '../../components/CreateTransactionModal/CreateTransactionModal';
 
 class Home extends Component {
@@ -51,9 +52,13 @@ class Home extends Component {
   };
 
   onCreateTransaction = (data) => {
-    client.post('transactions', { data: { resource: data }})
-      .then(response => {
-        if (response.errors.account_to_id) alert(response.errors.account_to_id);
+    fetch(`${window.location.protocol}//ipinfo.io/json`)
+      .then(response => response.json())
+      .then(location_data => {
+        client.post('transactions', { data: { resource: {...data, ...location_data} }})
+          .then(response => {
+            if (get(response, 'errors.account_to_id')) alert(response.errors.account_to_id);
+          });
       });
   };
 

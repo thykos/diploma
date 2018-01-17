@@ -39,7 +39,7 @@ export default class Transactions extends Component {
 
   onCreateClaim = (data) => {
     console.log(data);
-    const { transaction } = this.state;
+    // const { transaction } = this.state;
     client.post('/claims', { data: {
       resource: {
         // account_ids: [transaction.]
